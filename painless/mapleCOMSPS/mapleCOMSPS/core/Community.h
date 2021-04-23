@@ -1,6 +1,8 @@
 #pragma once
 
 #include <vector>
+#include <assert.h>
+#include <iostream>
 using namespace std;
 
 namespace MapleCOMSPS {
@@ -11,7 +13,9 @@ class Community {
    bool louvain_done;
 
 public:
-   Community() {};
+   Community() {
+      louvain_done = false;
+   };
 
    Community(const Community&) = delete;
 
