@@ -11,7 +11,9 @@ class Community {
    bool louvain_done;
 
 public:
-   Community() {};
+   Community() {
+      louvain_done = false;
+   };
 
    Community(const Community&) = delete;
 
