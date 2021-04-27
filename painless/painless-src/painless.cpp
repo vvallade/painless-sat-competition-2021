@@ -113,10 +113,8 @@ int main(int argc, char ** argv)
    setVerbosityLevel(Parameters::getIntParam("v", 0));
 
    // Create and init solvers
-   vector<SolverInterface *> solvers_LRB_recto;
-   vector<SolverInterface *> solvers_LRB_verso;
-   vector<SolverInterface *> solvers_VSIDS_recto;
-   vector<SolverInterface *> solvers_VSIDS_verso;
+   vector<SolverInterface *> solvers_LRB;
+   vector<SolverInterface *> solvers_VSIDS;
 
    SolverFactory::createMapleCOMSPSSolvers(cpus - 2, solvers);
    solvers.push_back(SolverFactory::createReducerSolver(SolverFactory::createMapleCOMSPSSolver()));
@@ -126,25 +124,15 @@ int main(int argc, char ** argv)
    SolverFactory::nativeDiversification(solvers);
 
    for (int id = 0; id < nSolvers; id++) {
-      if (id % 2 == 0) {
-         if (id % 4 == 0) {
-            solvers_LRB_verso.push_back(solvers[id]);
-         } else {
-            solvers_LRB_recto.push_back(solvers[id]);
-         }
+      if (id % 2) {
+         solvers_LRB.push_back(solvers[id]);
       } else {
-         if ((id - 1) % 4 == 0) {
-            solvers_VSIDS_verso.push_back(solvers[id]);
-         } else {
-            solvers_VSIDS_recto.push_back(solvers[id]);
-         }
+         solvers_VSIDS.push_back(solvers[id]);
       }
    }
 
-   SolverFactory::sparseRandomDiversification(solvers_LRB_recto);
-   SolverFactory::sparseRandomDiversification(solvers_LRB_verso);
-   SolverFactory::sparseRandomDiversification(solvers_VSIDS_recto);
-   SolverFactory::sparseRandomDiversification(solvers_VSIDS_verso);
+   SolverFactory::sparseRandomDiversification(solvers_LRB);
+   SolverFactory::sparseRandomDiversification(solvers_VSIDS);
 
    // Init Sharing
    // 15 CDCL, 1 Reducer producers by Sharer
