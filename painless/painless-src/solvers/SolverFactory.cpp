@@ -38,18 +38,20 @@ SolverFactory::sparseRandomDiversification(
       return;
 
    int vars = solvers[0]->getVariablesCount();
-   unsigned int seed;
-   int fd = open("/dev/random", O_RDONLY);
-   if (fd == -1 || read(fd, &seed, sizeof(seed)) == -1) {
-      seed = time(NULL);
+   static unsigned int seed = 0;
+   int fd = open("/dev/urandom", O_RDONLY);
+   while (seed == 0) {
+      if (fd == -1 || read(fd, &seed, sizeof(seed)) == -1) {
+         seed = time(NULL);
+      }
+      seed = seed % 86400;
    }
    if (fd != -1) {
       close(fd);
    }
-   seed = seed % 3600;
-   // The first solver of the group (1 LRB/1 VSIDS) keeps polarity = false for all vars
+
    for (int sid = 0; sid < solvers.size(); sid++) {
-      srand(seed * (MPI_RANK+1) * (solvers[sid]->id + 1));
+      srand(seed * (solvers[sid]->id + 1));
       for (int var = 1; var <= vars; var++) {
          if (rand() % solvers.size() == 0) {
             solvers[sid]->setPhase(var, rand() % 2 == 1);
