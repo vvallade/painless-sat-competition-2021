@@ -139,6 +139,8 @@ public:
 
    virtual vector<int> getSatAssumptions() = 0;
 
+   virtual void setStrengthening(bool b) {};
+
 
    /// Constructor.
    SolverInterface(int solverId, SolverType solverType)

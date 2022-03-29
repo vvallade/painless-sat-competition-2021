@@ -107,6 +107,8 @@ public:
 
    vector<int> getSatAssumptions();
 
+   void setStrengthening(bool b);
+
 
 protected:
    /// Pointer to a MapleCOMSPS solver.

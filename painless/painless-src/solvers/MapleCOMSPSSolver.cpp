@@ -378,3 +378,8 @@ MapleCOMSPSSolver::getSatAssumptions() {
    }
    return outCls;
 };
+
+void
+MapleCOMSPSSolver::setStrengthening(bool b) {
+   solver->setStrengthening(b);
+}
