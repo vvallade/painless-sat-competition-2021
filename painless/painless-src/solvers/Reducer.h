@@ -99,7 +99,7 @@ public:
    /// Native diversification.
    void diversify(int id);
 
-   bool strengthed(ClauseExchange * cls, ClauseExchange ** outCls);
+   bool strengthened(ClauseExchange * cls, ClauseExchange ** outCls);
 
    void printStatsStrengthening();
 

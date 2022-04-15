@@ -209,6 +209,10 @@ public:
     vec<uint32_t> conflicted;
     vec<uint32_t> almost_conflicted;
 
+    // Strengthening
+    bool strengthening;
+    void setStrengthening(bool b);
+
 protected:
 
     // Helper structures:
