@@ -118,6 +118,9 @@ public:
     bool (* cbkImportClause)(void *, int *, vec<Lit> &);
     void (* cbkExportClause)(void *, int, int, vec<Lit> &);	        // callback for clause learning
 
+    // Asynchronous Strengthening
+    bool strengthening;
+    void setStrengthening(bool b);
 
     // Solving:
     //

@@ -48,6 +48,7 @@ Reducer::Reducer(int id, SolverInterface *_solver) :
    SolverInterface(id, MAPLE)
 {
    solver = _solver;
+   solver->setStrengthening(true);
 }
 
 Reducer::~Reducer()
@@ -122,7 +123,7 @@ Reducer::solve(const vector<int> & cube)
       if (clausesToImport.getClause(&cls) == false) {
          continue;
       }
-      if (strengthed(cls, &strengthenedCls))
+      if (strengthened(cls, &strengthenedCls))
       {
          if (strengthenedCls->size == 0) {
             return UNSAT;
@@ -136,7 +137,7 @@ Reducer::solve(const vector<int> & cube)
 
 
 bool
-Reducer::strengthed(ClauseExchange * cls,
+Reducer::strengthened(ClauseExchange * cls,
                                ClauseExchange ** outCls)
 {
    vector<int> assumps;

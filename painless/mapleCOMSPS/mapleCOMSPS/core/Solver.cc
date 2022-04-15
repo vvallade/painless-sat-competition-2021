@@ -117,7 +117,7 @@ Solver::Solver() :
   , next_L_reduce      (15000)
 
   , counter            (0)
-
+  , strengthening      (false)
     // Resource constraints:
     //
   , conflict_budget    (-1)
@@ -180,7 +180,7 @@ Solver::Solver(const Solver &s) :
   , next_L_reduce      (s.next_L_reduce)
   
   , counter            (s.counter)
-  
+  , strengthening      (s.strengthening)
     // Resource constraints:
     //
   , conflict_budget    (s.conflict_budget)
@@ -1306,7 +1306,7 @@ lbool Solver::search(int& nof_conflicts)
             }
 
             if (next == lit_Undef) {
-                if (assumptions.size() > 0) { // Hack deguelasse
+                if (strengthening) {
                     shrinkAssumptions();
                     return l_True;
                 }
@@ -1348,6 +1348,11 @@ void Solver::getAssumptions(vec<Lit>& lits) {
         lits.push(assumptions[i]);
     }
 }
+
+void Solver::setStrengthening(bool b) {
+    strengthening = b;
+}
+
 
 double Solver::progressEstimate() const
 {

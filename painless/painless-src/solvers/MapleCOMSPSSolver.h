@@ -107,6 +107,8 @@ public:
 
    vector<int> getSatAssumptions();
 
+   void setStrengthening(bool b);
+
    void set_community(MapleCOMSPS::Community* c);
 
    void create_community();
