@@ -140,6 +140,8 @@ public:
 
    virtual vector<int> getSatAssumptions() = 0;
 
+   virtual void setStrengthening(bool b) {};
+
    virtual void set_community(MapleCOMSPS::Community *c) {};
 
    /// Constructor.

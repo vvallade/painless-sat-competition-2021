@@ -419,3 +419,8 @@ MapleCOMSPSSolver::create_community()
    louvain(vig, 0.00000001, node2var, area2nodes, solver->communities->get_node2area());
    solver->communities->set_ready(true);
 }
+
+void
+MapleCOMSPSSolver::setStrengthening(bool b) {
+   solver->setStrengthening(b);
+}
